@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template :: head"></head>
+
+<body>
+
+<header th:replace="plantilla/template :: header"></header>
+<div class="container">
+    <div class="card bg-light">
+        <div class="card-header bg-dark text-white" th:text="${title}"></div>
+        <div class="card-body">
+
+            <form th:action="@{/views/objectes/save}" th:object="${objecte}" method="post">
+                <div class="form-group row">
+                    <input type="hidden" th:field="*{id}">
+                    <label class="col-md-2" for="name">Nom:</label>
+                    <input type="text" th:field="*{nom}" class="form-control form-control-sm col-md-6" id="name"
+                           placeholder="Nom de l'objecte">
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></small>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2" for="color">Color:</label>
+                    <input type="text" th:field="*{color}" class="form-control form-control-sm col-md-6" id="color"
+                           placeholder="Color de l'objecte">
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></small>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2" for="talla">Talla:</label>
+                    <input type="text" th:field="*{talla}" class="form-control form-control-sm col-md-6" id="talla"
+                           placeholder="Talla de l'objecte">
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('talla')}" th:errors="*{talla}"></small>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2" for="ubicacio">Ubicació:</label>
+                    <select th:field="*{ubicacio}" class="form-control form-control-sm col-md-6" id="ubicacio">
+                        <option th:each="ubicacio:${ubicacions}"
+                                th:value="${ubicacio.id}"
+                                th:text="${ubicacio.ubicacio}"></option>
+                    </select>
+                </div>
+                <div class=" card-footer bg-dark">
+                        <input type="submit" class="btn btn-primary" value="Guardar"></input>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<footer th:replace="plantilla/template :: footer"></footer>
+
+</body>
+
+</html>
